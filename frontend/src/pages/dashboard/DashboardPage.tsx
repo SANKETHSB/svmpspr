@@ -9,6 +9,8 @@ import {
   LinearScale,
   BarElement,
   Title,
+  LineElement,
+  PointElement,
 } from "chart.js";
 import { Doughnut, Bar, Line } from "react-chartjs-2";
 import { dashboardAPI } from "../../services/api";
@@ -28,11 +30,9 @@ ChartJS.register(
   LinearScale,
   BarElement,
   Title,
+  LineElement,
+  PointElement,
 );
-
-// Register Line chart elements
-import { LineElement, PointElement } from "chart.js";
-ChartJS.register(LineElement, PointElement);
 
 const StatCard: React.FC<{
   label: string;
