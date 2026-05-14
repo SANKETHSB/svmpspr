@@ -9,8 +9,10 @@ import {
   LinearScale,
   BarElement,
   Title,
+  LineElement,
+  PointElement,
 } from "chart.js";
-import { Doughnut, Bar } from "react-chartjs-2";
+import { Doughnut, Bar, Line } from "react-chartjs-2";
 import { dashboardAPI } from "../../services/api";
 import { DashboardStats } from "../../types";
 import { useAuth } from "../../context/AuthContext";
@@ -28,6 +30,8 @@ ChartJS.register(
   LinearScale,
   BarElement,
   Title,
+  LineElement,
+  PointElement,
 );
 
 const StatCard: React.FC<{
@@ -101,6 +105,8 @@ const DashboardPage: React.FC = () => {
   const { isAdmin, isManager, isCompliance, isVendor, user } = useAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [vendorChartType, setVendorChartType] = useState<"doughnut" | "bar">("doughnut");
+  const [rfqChartType, setRfqChartType] = useState<"bar" | "line">("bar");
 
   useEffect(() => {
     if (!isVendor) {
@@ -303,9 +309,28 @@ const DashboardPage: React.FC = () => {
       {
         label: "RFQs",
         data: stats.rfqTrend?.map((r) => r.count) || [],
-        backgroundColor: ["#3b82f6", "#6b7280", "#22c55e", "#a855f7"],
+        backgroundColor: ["#00a4ef", "#3b82f6", "#22c55e", "#a855f7"],
         borderRadius: 8,
         borderSkipped: false,
+      },
+    ],
+  };
+
+  const lineData = {
+    labels: stats.rfqTrend?.map((r) => r.status) || [],
+    datasets: [
+      {
+        label: "RFQ Trend",
+        data: stats.rfqTrend?.map((r) => r.count) || [],
+        borderColor: "#00a4ef",
+        backgroundColor: "rgba(0, 164, 239, 0.1)",
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 6,
+        pointBackgroundColor: "#00a4ef",
+        pointBorderColor: "#ffffff",
+        pointBorderWidth: 2,
       },
     ],
   };
@@ -389,14 +414,41 @@ const DashboardPage: React.FC = () => {
       >
         <div className="card chart-card">
           <div className="card-header">
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span
-                className="header-icon"
-                style={{ background: "rgba(59,130,246,0.25)" }}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span
+                  className="header-icon"
+                  style={{ background: "rgba(0,164,239,0.25)" }}
+                >
+                  <i className="bi bi-pie-chart-fill" />
+                </span>
+                Vendor Status Distribution
+              </div>
+              <button
+                onClick={() => setVendorChartType(vendorChartType === "doughnut" ? "bar" : "doughnut")}
+                style={{
+                  background: "rgba(0,164,239,0.2)",
+                  border: "1px solid rgba(0,164,239,0.4)",
+                  color: "#00a4ef",
+                  padding: "6px 12px",
+                  borderRadius: 6,
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(0,164,239,0.3)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,164,239,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(0,164,239,0.2)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               >
-                <i className="bi bi-pie-chart-fill" />
-              </span>
-              Vendor Status Distribution
+                <i className={`bi ${vendorChartType === "doughnut" ? "bi-bar-chart-fill" : "bi-pie-chart-fill"}`} />
+                {" "}{vendorChartType === "doughnut" ? "Bar" : "Doughnut"}
+              </button>
             </div>
           </div>
           <div className="card-body">
@@ -408,16 +460,46 @@ const DashboardPage: React.FC = () => {
                 justifyContent: "center",
               }}
             >
-              <Doughnut
-                data={doughnutData}
-                options={{
-                  cutout: "65%",
-                  plugins: {
-                    legend: { position: "bottom", labels: { color: "#fff" } },
-                  },
-                  maintainAspectRatio: false,
-                }}
-              />
+              {vendorChartType === "doughnut" ? (
+                <Doughnut
+                  data={doughnutData}
+                  options={{
+                    cutout: "65%",
+                    plugins: {
+                      legend: { position: "bottom", labels: { color: "#fff" } },
+                    },
+                    maintainAspectRatio: false,
+                  }}
+                />
+              ) : (
+                <Bar
+                  data={{
+                    labels: stats.vendorsByStatus?.map((v) => v.status.replace("_", " ")) || [],
+                    datasets: [
+                      {
+                        label: "Vendors",
+                        data: stats.vendorsByStatus?.map((v) => v.count) || [],
+                        backgroundColor: ["#f59e0b", "#22c55e", "#ef4444", "#6b7280"],
+                        borderRadius: 8,
+                        borderSkipped: false,
+                      },
+                    ],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                        grid: { color: "rgba(255,255,255,0.14)" },
+                        ticks: { color: "#fff" },
+                      },
+                      x: { grid: { display: false }, ticks: { color: "#fff" } },
+                    },
+                  }}
+                />
+              )}
             </div>
             <div className="chart-analysis">
               <span className="analysis-icon">
@@ -428,38 +510,101 @@ const DashboardPage: React.FC = () => {
                 {pendingPct}% are pending review.
               </span>
             </div>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: 12,
+              marginTop: 16,
+              paddingTop: 16,
+              borderTop: "1px solid rgba(0,164,239,0.2)"
+            }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Approved</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#22c55e" }}>{approvedCount}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Pending</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#f59e0b" }}>{pendingCount}</div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="card chart-card">
           <div className="card-header">
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span
-                className="header-icon"
-                style={{ background: "rgba(34,197,94,0.25)" }}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span
+                  className="header-icon"
+                  style={{ background: "rgba(0,164,239,0.25)" }}
+                >
+                  <i className={`bi ${rfqChartType === "bar" ? "bi-bar-chart-fill" : "bi-graph-up"}`} />
+                </span>
+                RFQ Status Overview
+              </div>
+              <button
+                onClick={() => setRfqChartType(rfqChartType === "bar" ? "line" : "bar")}
+                style={{
+                  background: "rgba(0,164,239,0.2)",
+                  border: "1px solid rgba(0,164,239,0.4)",
+                  color: "#00a4ef",
+                  padding: "6px 12px",
+                  borderRadius: 6,
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(0,164,239,0.3)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,164,239,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(0,164,239,0.2)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               >
-                <i className="bi bi-bar-chart-fill" />
-              </span>
-              RFQ Status Overview
+                <i className={`bi ${rfqChartType === "bar" ? "bi-graph-up" : "bi-bar-chart-fill"}`} />
+                {" "}{rfqChartType === "bar" ? "Line" : "Bar"}
+              </button>
             </div>
           </div>
           <div className="card-body">
             <div style={{ height: 220 }}>
-              <Bar
-                data={barData}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  plugins: { legend: { display: false } },
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      grid: { color: "rgba(255,255,255,0.14)" },
-                      ticks: { color: "#fff" },
+              {rfqChartType === "bar" ? (
+                <Bar
+                  data={barData}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                        grid: { color: "rgba(255,255,255,0.14)" },
+                        ticks: { color: "#fff" },
+                      },
+                      x: { grid: { display: false }, ticks: { color: "#fff" } },
                     },
-                    x: { grid: { display: false }, ticks: { color: "#fff" } },
-                  },
-                }}
-              />
+                  }}
+                />
+              ) : (
+                <Line
+                  data={lineData}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                        grid: { color: "rgba(255,255,255,0.14)" },
+                        ticks: { color: "#fff" },
+                      },
+                      x: { grid: { display: false }, ticks: { color: "#fff" } },
+                    },
+                  }}
+                />
+              )}
             </div>
             <div className="chart-analysis">
               <span className="analysis-icon">
@@ -472,6 +617,27 @@ const DashboardPage: React.FC = () => {
                 Award rate is {awardedPct}% of total RFQs.
               </span>
             </div>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 12,
+              marginTop: 16,
+              paddingTop: 16,
+              borderTop: "1px solid rgba(0,164,239,0.2)"
+            }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Open</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#3b82f6" }}>{stats.openRfqs}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Awarded</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#22c55e" }}>{stats.awardedRfqs}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Closed</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#f59e0b" }}>{stats.closedRfqs}</div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="card chart-card">
@@ -479,7 +645,7 @@ const DashboardPage: React.FC = () => {
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span
                 className="header-icon"
-                style={{ background: "rgba(245,158,11,0.25)" }}
+                style={{ background: "rgba(0,164,239,0.25)" }}
               >
                 <i className="bi bi-diagram-3-fill" />
               </span>
@@ -495,6 +661,7 @@ const DashboardPage: React.FC = () => {
                   style={{
                     width: `${(seg.value / rfqPipelineTotal) * 100}%`,
                     background: seg.color,
+                    transition: "all 0.3s ease",
                   }}
                 />
               ))}
@@ -516,8 +683,25 @@ const DashboardPage: React.FC = () => {
                 <i className="bi bi-flag-fill" />
               </span>
               <span>
-                Pipeline completion rate is {completionPct}% (awarded + closed).
+                Pipeline completion rate is {completionPct}% (awarded + closed). Health: <strong>{pipelineHealth}</strong>
               </span>
+            </div>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: 12,
+              marginTop: 16,
+              paddingTop: 16,
+              borderTop: "1px solid rgba(0,164,239,0.2)"
+            }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Completion Rate</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#00a4ef" }}>{completionPct}%</div>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Total RFQs</div>
+                <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#3b82f6" }}>{rfqTotal}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -526,7 +710,7 @@ const DashboardPage: React.FC = () => {
       <div className="card" style={{ marginBottom: 24 }}>
         <div className="card-header">
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span className="header-icon" style={{ background: "rgba(59,130,246,0.25)" }}>
+            <span className="header-icon" style={{ background: "rgba(0,164,239,0.25)" }}>
               <i className="bi bi-clipboard-data-fill" />
             </span>
             Executive Insights

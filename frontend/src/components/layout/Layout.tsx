@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "../../context/AuthContext";
 import { notifAPI } from "../../services/api";
 import { Avatar } from "../common/SharedComponents";
+import { VoiceAssistantWidget } from "../voice/VoiceAssistantWidget";
 
 interface NavItem {
   to: string;
@@ -291,6 +292,7 @@ const Layout: React.FC = () => {
           </AnimatePresence>
         </main>
       </div>
+      <VoiceAssistantWidget />
     </div>
   );
 };
