@@ -1,0 +1,22 @@
+✅ DATABASE CLEANED!
+
+I've deleted the manually created users that were causing the 500 error.
+
+NOW DO THIS:
+
+1. STOP the backend if it's running (press Ctrl+C in the backend terminal)
+
+2. START the backend again:
+   cd c:\Users\hp\Desktop\svmpspro-main\svpms\backend
+   mvn spring-boot:run
+
+3. WATCH for this message in the console:
+   "=== SVPMS Data Seeded. Login: admin@svpms.com / Admin@123456 ==="
+
+4. LOGIN with:
+   Email: admin@svpms.com
+   Password: Admin@123456
+
+The DataSeeder will automatically create users with correct passwords!
+
+If you still get errors, COPY THE ENTIRE BACKEND CONSOLE OUTPUT and share it with me.

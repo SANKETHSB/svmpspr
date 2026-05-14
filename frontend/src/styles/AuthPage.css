@@ -1,0 +1,520 @@
+/* Auth Page Container — COSMIC INDIGO theme */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0b1e 60%, #050614 100%);
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Cosmic starfield overlay */
+.auth-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(1px 1px at 70% 20%, rgba(200, 200, 255, 0.7), transparent 60%),
+    radial-gradient(1.5px 1.5px at 40% 70%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 85% 60%, rgba(220, 220, 255, 0.7), transparent 60%),
+    radial-gradient(2px 2px at 10% 85%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(1px 1px at 55% 45%, rgba(180, 180, 255, 0.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 92% 18%, rgba(255, 255, 255, 0.75), transparent 60%);
+  opacity: 0.7;
+}
+
+.auth-container::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: -200px;
+  left: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(129, 140, 248, 0.18), transparent 65%);
+  filter: blur(30px);
+}
+
+.auth-wrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  background: linear-gradient(160deg, rgba(45, 40, 110, 0.55) 0%, rgba(20, 18, 55, 0.7) 100%);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(139, 130, 255, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 80px -20px rgba(99, 102, 241, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  min-height: 500px;
+  max-height: 96vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Left Panel - Cosmic Gradient Card */
+.left-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #312e81 0%, #1e1b4b 50%, #4c1d95 100%);
+  padding: 25px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 25%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(1px 1px at 80% 35%, rgba(200, 200, 255, 0.8), transparent 60%),
+    radial-gradient(2px 2px at 50% 70%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(1px 1px at 30% 85%, rgba(220, 220, 255, 0.7), transparent 60%);
+  opacity: 0.6;
+}
+
+.left-panel>* {
+  position: relative;
+  z-index: 1;
+}
+
+.gradient-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.card-content {
+  color: #ffffff;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.logo-icon {
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  backdrop-filter: blur(10px);
+}
+
+.logo span {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Main Heading */
+.main-heading {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  opacity: 0.9;
+  margin-bottom: 18px;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: default;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.step-button.active {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.step-button:disabled {
+  opacity: 0.5;
+}
+
+.step-number {
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.step-button.active .step-number {
+  background: #ffffff;
+  color: #6366f1;
+}
+
+.step-text {
+  text-align: left;
+}
+
+/* Right Panel - Cosmic Glass Form */
+.right-panel {
+  flex: 1;
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, rgba(20, 18, 55, 0.55) 0%, rgba(10, 11, 30, 0.7) 100%);
+  overflow: hidden;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ece9ff;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+
+.form-subtitle {
+  font-size: 0.8rem;
+  color: #a5a1d4;
+  margin-bottom: 12px;
+}
+
+/* Form Styles */
+.auth-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 8px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #c4b5fd;
+  margin-bottom: 3px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 9px 12px;
+  background: rgba(13, 12, 44, 0.6);
+  border: 1px solid rgba(139, 130, 255, 0.22);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #ece9ff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  font-family: inherit;
+  backdrop-filter: blur(6px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #6e6a9a;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #818cf8;
+  background: rgba(13, 12, 44, 0.8);
+  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.18), 0 0 22px rgba(129, 140, 248, 0.25);
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+  background-color: rgba(13, 12, 44, 0.4);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.form-group input.input-error {
+  border-color: #f87171;
+}
+
+.form-group input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.18);
+}
+
+/* Password Input Wrapper */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  padding-right: 45px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #a5a1d4;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: #ece9ff;
+}
+
+.password-toggle i {
+  font-size: 1.1rem;
+}
+
+/* Error Hint */
+.error-hint {
+  color: #fca5a5;
+  font-size: 0.7rem;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+/* Submit Button — cosmic pill */
+.submit-button {
+  width: 100%;
+  padding: 11px 18px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 3px;
+  box-shadow: 0 8px 22px -8px rgba(139, 92, 246, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  letter-spacing: 0.2px;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  box-shadow: 0 14px 30px -8px rgba(167, 139, 250, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Links */
+.login-link,
+.signup-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #a5a1d4;
+}
+
+.login-link a,
+.signup-link a {
+  color: #c4b5fd;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-link a:hover,
+.signup-link a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .auth-wrapper {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    padding: 40px 30px;
+  }
+
+  .main-heading {
+    font-size: 2rem;
+  }
+
+  .right-panel {
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-container {
+    padding: 10px;
+  }
+
+  .auth-wrapper {
+    border-radius: 12px;
+  }
+
+  .left-panel {
+    padding: 30px 20px;
+  }
+
+  .main-heading {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .right-panel {
+    padding: 30px 20px;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+/* Login Mode - Larger Sizes */
+.auth-mode-login .right-panel {
+  padding: 40px 50px;
+}
+
+.auth-mode-login .form-title {
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.auth-mode-login .form-subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
+.auth-mode-login .form-group {
+  margin-bottom: 20px;
+}
+
+.auth-mode-login .form-group label {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.auth-mode-login .form-group input {
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+}
+
+.auth-mode-login .submit-button {
+  padding: 14px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.auth-mode-login .login-link,
+.auth-mode-login .signup-link {
+  margin-top: 24px;
+  font-size: 0.9rem;
+}
+
+.auth-mode-login .left-panel {
+  padding: 60px 40px;
+}
+
+.auth-mode-login .logo {
+  margin-bottom: 32px;
+}
+
+.auth-mode-login .logo-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
+
+.auth-mode-login .logo span {
+  font-size: 1.5rem;
+}
+
+.auth-mode-login .main-heading {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.auth-mode-login .description {
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+
+.auth-mode-login .step-button {
+  padding: 16px 20px;
+  gap: 16px;
+  font-size: 0.95rem;
+}
+
+.auth-mode-login .step-number {
+  width: 32px;
+  height: 32px;
+  font-size: 0.9rem;
+}
+
+.auth-mode-login .steps {
+  gap: 12px;
+}
