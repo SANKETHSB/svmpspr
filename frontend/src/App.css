@@ -53,46 +53,46 @@
   --glow: 0 0 18px rgba(99, 102, 241, 0.25);
 }
 
-/* Dark theme — "Cosmic Indigo" inspired by Sync wellness UI */
+/* Dark theme — "Navy Blue Professional Cosmetic UI" */
 .theme-dark {
-  --bg: #0a0b1e;
+  --bg: #0f1b3d;
   --bg-gradient: radial-gradient(
     ellipse at top,
-    #1e1b4b 0%,
-    #0a0b1e 60%,
-    #050614 100%
+    #1e3a7a 0%,
+    #0f1b3d 60%,
+    #081c3f 100%
   );
-  --surface: rgba(30, 27, 75, 0.55);
-  --surface-solid: #1a1745;
-  --surface2: rgba(20, 18, 55, 0.65);
-  --border: rgba(139, 130, 255, 0.18);
-  --border-strong: rgba(139, 130, 255, 0.35);
+  --surface: rgba(30, 58, 122, 0.6);
+  --surface-solid: #1e3a7a;
+  --surface2: rgba(15, 27, 61, 0.8);
+  --border: rgba(0, 164, 239, 0.18);
+  --border-strong: rgba(0, 164, 239, 0.35);
   --text: #ffffff;
   --text-muted: #ffffff;
   --text-light: #ffffff;
-  --sidebar-bg: linear-gradient(180deg, #0d0c2c 0%, #0a0b1e 100%);
+  --sidebar-bg: linear-gradient(180deg, #132551 0%, #0f1b3d 100%);
   --sidebar-text: #ffffff;
   --sidebar-text-active: #ffffff;
-  --sidebar-active-bg: linear-gradient(135deg, #6366f1, #8b5cf6);
-  --sidebar-hover-bg: rgba(139, 130, 255, 0.08);
+  --sidebar-active-bg: linear-gradient(135deg, #00a4ef, #0084d4);
+  --sidebar-hover-bg: rgba(0, 164, 239, 0.1);
   --sidebar-section: #ffffff;
-  --topbar-bg: rgba(13, 12, 44, 0.65);
-  --topbar-border: rgba(139, 130, 255, 0.15);
+  --topbar-bg: rgba(15, 27, 61, 0.75);
+  --topbar-border: rgba(0, 164, 239, 0.2);
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
   --shadow-md:
-    0 8px 24px rgba(99, 102, 241, 0.18), 0 4px 12px rgba(0, 0, 0, 0.4);
+    0 8px 24px rgba(0, 164, 239, 0.15), 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg:
-    0 20px 50px rgba(99, 102, 241, 0.25), 0 12px 30px rgba(0, 0, 0, 0.55);
-  --input-bg: rgba(13, 12, 44, 0.6);
-  --input-border: rgba(139, 130, 255, 0.22);
-  --input-focus: #818cf8;
-  --hover-bg: rgba(139, 130, 255, 0.1);
-  --table-stripe: rgba(20, 18, 55, 0.4);
-  --badge-bg: rgba(139, 130, 255, 0.15);
-  --code-bg: rgba(13, 12, 44, 0.7);
-  --accent: #818cf8;
-  --accent-2: #c084fc;
-  --glow: 0 0 24px rgba(129, 140, 248, 0.45);
+    0 20px 50px rgba(0, 164, 239, 0.2), 0 12px 30px rgba(0, 0, 0, 0.55);
+  --input-bg: rgba(15, 27, 61, 0.7);
+  --input-border: rgba(0, 164, 239, 0.25);
+  --input-focus: #00a4ef;
+  --hover-bg: rgba(0, 164, 239, 0.12);
+  --table-stripe: rgba(30, 58, 122, 0.4);
+  --badge-bg: rgba(0, 164, 239, 0.18);
+  --code-bg: rgba(15, 27, 61, 0.8);
+  --accent: #00a4ef;
+  --accent-2: #3b82f6;
+  --glow: 0 0 24px rgba(0, 164, 239, 0.4);
 }
 
 /* ---------- Base ---------- */
@@ -432,7 +432,7 @@ body * {
 
 .form-control:focus {
   border-color: var(--input-focus);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 3px rgba(0, 164, 239, 0.15);
 }
 
 .form-control.is-invalid {
@@ -490,14 +490,14 @@ body * {
 }
 
 .btn-primary {
-  background: #3b82f6;
+  background: #00a4ef;
   color: #fff;
-  border-color: #3b82f6;
+  border-color: #00a4ef;
 }
 
 .btn-primary:hover {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #0084d4;
+  border-color: #0084d4;
 }
 
 .btn-success {
@@ -544,12 +544,12 @@ body * {
 
 .btn-outline-primary {
   background: transparent;
-  color: #3b82f6;
-  border-color: #3b82f6;
+  color: #00a4ef;
+  border-color: #00a4ef;
 }
 
 .btn-outline-primary:hover {
-  background: #3b82f6;
+  background: #00a4ef;
   color: #fff;
 }
 
@@ -586,8 +586,8 @@ body * {
 }
 
 .badge-primary {
-  background: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
+  background: rgba(0, 164, 239, 0.15);
+  color: #00a4ef;
 }
 
 .badge-success {
@@ -1406,12 +1406,18 @@ body::before {
 /* --- Chart cards: glass + glow + canvas lift --- */
 .chart-card {
   position: relative;
+  border: 1px solid rgba(0, 164, 239, 0.2);
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--surface) 88%, transparent),
+    color-mix(in srgb, var(--surface) 85%, rgba(0, 164, 239, 0.05))
+  );
 }
 
 .chart-card:hover {
   box-shadow:
-    0 22px 54px -28px rgba(99, 102, 241, 0.55),
+    0 22px 54px -28px rgba(0, 164, 239, 0.4),
     var(--shadow-md);
+  border-color: rgba(0, 164, 239, 0.4);
 }
 
 .chart-card canvas,
