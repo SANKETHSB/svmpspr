@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import AuthPage from "../../pages/auth/AuthPage";
+import { VoiceAssistantWidget } from "../voice/VoiceAssistantWidget";
 
 type Stage = "curtain" | "main";
 
@@ -339,6 +340,9 @@ export default function TheaterApp() {
         @keyframes shimmer { from{opacity:.6} to{opacity:1} }
         *{box-sizing:border-box;margin:0;padding:0;}
       `}</style>
+
+      {/* Voice Assistant Widget */}
+      <VoiceAssistantWidget />
     </div>
   );
 }

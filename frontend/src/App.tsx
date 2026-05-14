@@ -8,6 +8,7 @@ import "./App.css";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { VoiceAssistantProvider } from "./context/VoiceAssistantContext";
 import Layout from "./components/layout/Layout";
 
 // Pages
@@ -197,10 +198,12 @@ const AppRoutes: React.FC = () => {
 const App: React.FC = () => (
   <ThemeProvider>
     <AuthProvider>
-      <BrowserRouter>
-        <AppRoutes />
-        <ToastContainer position="top-right" autoClose={3500} theme="colored" />
-      </BrowserRouter>
+      <VoiceAssistantProvider>
+        <BrowserRouter>
+          <AppRoutes />
+          <ToastContainer position="top-right" autoClose={3500} theme="colored" />
+        </BrowserRouter>
+      </VoiceAssistantProvider>
     </AuthProvider>
   </ThemeProvider>
 );
