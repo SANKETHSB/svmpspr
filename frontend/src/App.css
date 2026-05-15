@@ -2233,7 +2233,7 @@ body {
     0 20px 50px rgba(99, 102, 241, 0.25);
 }
 
-/* --- Sidebar: cosmic dark with glowing active state --- */
+/* --- Sidebar: cosmic dark with simple active state --- */
 .theme-dark .sidebar {
   background: var(--sidebar-bg);
   border-right: 1px solid var(--border);
@@ -2241,9 +2241,6 @@ body {
 
 .theme-dark .sidebar-link.active {
   background: var(--sidebar-active-bg) !important;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
-    0 8px 24px -8px rgba(99, 102, 241, 0.7);
 }
 
 .theme-dark .sidebar-link.active::before {
@@ -2262,7 +2259,7 @@ body {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* --- Buttons: pill shape + neon-indigo glow (Sync vibe) --- */
+/* --- Buttons: pill shape simple style --- */
 .btn {
   border-radius: 999px;
   padding: 9px 18px;
@@ -2279,23 +2276,17 @@ body {
 
 .btn-primary {
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  box-shadow:
-    0 8px 22px -8px rgba(139, 92, 246, 0.75),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
-  box-shadow:
-    0 12px 30px -8px rgba(167, 139, 250, 0.85),
-    0 0 0 1px rgba(255, 255, 255, 0.18) inset;
 }
 
 .btn-icon {
   border-radius: 999px;
 }
 
-/* --- Inputs: glass with subtle inner glow --- */
+/* --- Inputs: glass with simple focus --- */
 .theme-dark .form-control {
   background: var(--input-bg);
   border-color: var(--input-border);
@@ -2309,32 +2300,22 @@ body {
 
 .theme-dark .form-control:focus {
   border-color: var(--accent);
-  box-shadow:
-    0 0 0 4px rgba(129, 140, 248, 0.18),
-    0 0 22px rgba(129, 140, 248, 0.25);
 }
 
-/* --- Page title: huge bold display gradient (Sync hero feel) --- */
+/* --- Page title: simple bold display --- */
 .page-title {
   font-size: 2rem;
   font-weight: 800;
 }
 
 .theme-dark .page-title {
-  background: linear-gradient(90deg, #ffffff 0%, #c4b5fd 60%, #818cf8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: #fff;
-  text-shadow: 0 4px 30px rgba(129, 140, 248, 0.25);
+  color: #ffffff;
 }
 
-/* --- Hero banner: cosmic gradient + starfield overlay --- */
+/* --- Hero banner: simple gradient --- */
 .theme-dark .hero-banner {
   background: linear-gradient(135deg, #312e81 0%, #1e1b4b 50%, #4c1d95 100%);
   border: 1px solid rgba(139, 130, 255, 0.25);
-  box-shadow:
-    0 30px 70px -30px rgba(99, 102, 241, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }
 
 .theme-dark .hero-banner::after {
@@ -2379,20 +2360,15 @@ body {
 
 .hero-banner .btn-primary {
   background: linear-gradient(135deg, #818cf8, #c084fc) !important;
-  box-shadow: 0 10px 28px -6px rgba(192, 132, 252, 0.7) !important;
 }
 
-/* --- Stat icons: circular halo glow like Sync metric icons --- */
+/* --- Stat icons: simple circular style --- */
 .theme-dark .stat-icon {
-  box-shadow:
-    0 0 0 1px rgba(139, 130, 255, 0.25) inset,
-    0 8px 20px -8px currentColor;
+  border: 1px solid rgba(139, 130, 255, 0.25);
 }
 
 .theme-dark .stat-card:hover .stat-icon {
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-    0 0 30px -2px currentColor;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* --- Badges: pill + subtle border in dark --- */
@@ -2468,7 +2444,7 @@ body {
   background: rgba(129, 140, 248, 0.14);
 }
 
-/* --- Login page: full cosmic upgrade --- */
+/* --- Login page: simple style --- */
 .theme-dark .login-page {
   background: var(--bg-gradient);
 }
@@ -2480,20 +2456,15 @@ body {
     rgba(20, 18, 55, 0.7)
   );
   border: 1px solid var(--border-strong);
-  box-shadow:
-    0 30px 80px -20px rgba(99, 102, 241, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
 }
 
 .theme-dark .login-logo {
   background: linear-gradient(135deg, #818cf8, #c084fc);
-  box-shadow: 0 0 30px rgba(129, 140, 248, 0.6);
 }
 
-/* --- Brand: pulsing heart-line icon vibe in sidebar --- */
+/* --- Brand: simple icon in sidebar --- */
 .theme-dark .sidebar-brand-icon {
   background: linear-gradient(135deg, #818cf8, #c084fc);
-  box-shadow: 0 0 24px rgba(129, 140, 248, 0.55);
 }
 
 /* --- Cosmic utility classes --- */
@@ -2525,13 +2496,12 @@ body {
   border-radius: 18px;
 }
 
-/* --- Empty state with cosmic flair --- */
+/* --- Empty state simple style --- */
 .theme-dark .empty-state i {
   background: linear-gradient(135deg, #818cf8, #c084fc);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: #fff;
-  filter: drop-shadow(0 4px 14px rgba(129, 140, 248, 0.4));
+  -webkit-text-fill-color: transparent;
 }
 
 /* --- Modal in dark --- */
@@ -2539,38 +2509,71 @@ body {
   background: rgba(5, 6, 20, 0.75);
 }
 
-/* --- Toast in dark --- */
+/* --- Toast notifications - Simple and clean --- */
 .theme-dark .Toastify__toast {
-  background: linear-gradient(
-    160deg,
-    rgba(45, 40, 110, 0.92),
-    rgba(20, 18, 55, 0.95)
-  ) !important;
+  background: rgba(30, 27, 75, 0.95) !important;
   color: var(--text) !important;
   border: 1px solid var(--border);
 }
 
-/* --- Notification badge: amber → pink gradient with soft pulse glow --- */
+/* Success toast - Green */
+.theme-dark .Toastify__toast--success {
+  background: rgba(34, 197, 94, 0.25) !important;
+  border: 1px solid rgba(34, 197, 94, 0.5) !important;
+  color: #86efac !important;
+}
+
+.Toastify__toast--success {
+  background: rgba(34, 197, 94, 0.2) !important;
+  border: 1px solid rgba(34, 197, 94, 0.4) !important;
+  color: #16a34a !important;
+}
+
+/* Error toast - Red */
+.theme-dark .Toastify__toast--error {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border: 1px solid rgba(239, 68, 68, 0.5) !important;
+  color: #fca5a5 !important;
+}
+
+.Toastify__toast--error {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  color: #dc2626 !important;
+}
+
+/* Warning toast - Yellow */
+.theme-dark .Toastify__toast--warning {
+  background: rgba(234, 179, 8, 0.25) !important;
+  border: 1px solid rgba(234, 179, 8, 0.5) !important;
+  color: #fde047 !important;
+}
+
+.Toastify__toast--warning {
+  background: rgba(234, 179, 8, 0.2) !important;
+  border: 1px solid rgba(234, 179, 8, 0.4) !important;
+  color: #ca8a04 !important;
+}
+
+/* Info toast - Blue */
+.theme-dark .Toastify__toast--info {
+  background: rgba(59, 130, 246, 0.2) !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+}
+
+.Toastify__toast--info {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+/* --- Notification badge: simple style --- */
 .notif-badge {
-  animation: notifGlow 2.2s ease-in-out infinite;
   letter-spacing: 0.2px;
 }
 
-@keyframes notifGlow {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 2px rgba(236, 72, 153, 0.55));
-  }
-
-  50% {
-    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.85));
-  }
-}
-
-/* --- Theme toggle styled to match cosmic (dead — kept harmless) --- */
+/* --- Theme toggle simple style --- */
 .theme-dark .theme-toggle.dark {
   background: linear-gradient(135deg, #6366f1, #c084fc);
-  box-shadow: 0 0 12px rgba(129, 140, 248, 0.6);
 }
 
 /* --- Reduce motion (accessibility) --- */
